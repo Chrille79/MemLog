@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,11 @@ namespace MemLog
                 factory,
                 memLogService,
                 (_, logLevel) => logLevel >= minLevel);
+        }
+
+        public static IApplicationBuilder UseMemLog(this IApplicationBuilder app)
+        {
+            return app.UseMiddleware<MemLogMiddleware>();
         }
     }
 }
