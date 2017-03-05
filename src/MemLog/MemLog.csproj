@@ -10,8 +10,9 @@
     <PackageReleaseNotes>First release</PackageReleaseNotes>
     <PackageLicenseUrl>https://raw.githubusercontent.com/Chrille79/MemLog/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/Chrille79/MemLog</PackageProjectUrl>
-    <Copyright>Copyright 2016 (c) Christian Johansson. All rights reserved.</Copyright>
+    <Copyright>Copyright 2017 (c) Christian Johansson. All rights reserved.</Copyright>
     <PackageTags>logger logging logs</PackageTags>
+  
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
