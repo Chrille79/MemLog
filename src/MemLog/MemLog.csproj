@@ -8,12 +8,18 @@
     <Description>Awesome application logging utility</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageReleaseNotes>First release</PackageReleaseNotes>
-    <Copyright>Copyright 2016 (c) Contoso Corporation. All rights reserved.</Copyright>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/Chrille79/MemLog/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/Chrille79/MemLog</PackageProjectUrl>
+    <Copyright>Copyright 2016 (c) Christian Johansson. All rights reserved.</Copyright>
     <PackageTags>logger logging logs</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DocumentationFile>bin\Release\netcoreapp1.0\MemLog.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Debug\netcoreapp1.0\MemLog.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
