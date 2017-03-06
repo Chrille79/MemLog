@@ -23,8 +23,8 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerF
   //Add MemLog
   //loggerFactory.AddMemLog(memLogService, LogLevel.Trace);
   //Add MemLog - filter namespace Microsoft to LogLevel.Warnings or worse
-  loggerFactory.AddMemLog(memLogService,(name, logLevel) => 
-                          (name.StartsWith("Microsoft") ? logLevel >= LogLevel.Warning : logLevel >= LogLevel.Trace));
+  loggerFactory.AddMemLog(memLogService,
+                  (name, logLevel) => (name.StartsWith("Microsoft") ? logLevel >= LogLevel.Warning : logLevel >= LogLevel.Trace));
  
   if (env.IsDevelopment())
   {
