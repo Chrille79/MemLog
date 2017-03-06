@@ -12,18 +12,18 @@ namespace MemLog
     {
         public static IServiceCollection AddMemLogService(this IServiceCollection services)
         {
-            return services.AddSingleton<MemLogService>();
+            return services.AddSingleton<IMemLogService,MemLogService>();
         }
 
         public static ILoggerFactory AddMemLog(this ILoggerFactory factory,
-                                          MemLogService memLogService,
+                                          IMemLogService memLogService,
                                           Func<string, LogLevel, bool> filter = null)
         {
             factory.AddProvider(new MemLogProvider(filter, true, memLogService));
             return factory;
         }
 
-        public static ILoggerFactory AddMemLog(this ILoggerFactory factory, MemLogService memLogService, LogLevel minLevel)
+        public static ILoggerFactory AddMemLog(this ILoggerFactory factory, IMemLogService memLogService, LogLevel minLevel)
         {
             return AddMemLog(
                 factory,

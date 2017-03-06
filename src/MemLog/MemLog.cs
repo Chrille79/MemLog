@@ -8,14 +8,14 @@ namespace MemLog
     public class MemLog : ILogger
     {
         private static readonly string _loglevelPadding = ": ";
-        private readonly MemLogService _memLogService;
+        private readonly IMemLogService _memLogService;
 
         private Func<string, LogLevel, bool> _filter;
 
         [ThreadStatic]
         private static StringBuilder _logBuilder;
         
-        public MemLog(string name, Func<string, LogLevel, bool> filter, bool includeScopes, MemLogService memLogService)
+        public MemLog(string name, Func<string, LogLevel, bool> filter, bool includeScopes, IMemLogService memLogService)
         {
             if (name == null)
             {

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MemLog
 {
-    public class MemLogService : IEnumerable<LogMessageEntry>
+    public class MemLogService : IEnumerable<LogMessageEntry>, IMemLogService
     {
         //private readonly BlockingCollection<LogMessageEntry> _que = new BlockingCollection<LogMessageEntry>(10);
         private readonly Queue<LogMessageEntry> _que = new Queue<LogMessageEntry>(100);
