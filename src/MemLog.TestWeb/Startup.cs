@@ -16,19 +16,23 @@ namespace MemLog.TestWeb
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            //Add MemLogService thats hold the memory log
             services.AddMemLogService();
             services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, MemLogService memLogService)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IMemLogService memLogService)
         {
             loggerFactory.AddConsole();
-            loggerFactory.AddMemLog(memLogService, LogLevel.Trace);
-
+            //Add MemLog
+            //loggerFactory.AddMemLog(memLogService, LogLevel.Trace);
+            //Add MemLog - filter namespace Microsoft to LogLevel.Warnings or worse
+            loggerFactory.AddMemLog(memLogService,(name, logLevel) => (name.StartsWith("Microsoft") ? logLevel >= LogLevel.Warning : logLevel >= LogLevel.Trace));
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                //Add MemLogMiddleware to enable /memlog page
                 app.UseMemLog();
             }
 

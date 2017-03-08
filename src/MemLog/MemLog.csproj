@@ -3,11 +3,11 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp1.0</TargetFramework>
     <PackageId>MemLog.ChristianJohansson</PackageId>
-    <PackageVersion>1.0.0</PackageVersion>
+    <PackageVersion>1.0.2</PackageVersion>
     <Authors>Christian Johansson</Authors>
     <Description>Awesome application logging utility</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageReleaseNotes>First release</PackageReleaseNotes>
+    <PackageReleaseNotes>Option to provide a custom MemLogService using IMemLogService interface. See project site for more information.</PackageReleaseNotes>
     <PackageLicenseUrl>https://raw.githubusercontent.com/Chrille79/MemLog/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/Chrille79/MemLog</PackageProjectUrl>
     <Copyright>Copyright 2017 (c) Christian Johansson. All rights reserved.</Copyright>

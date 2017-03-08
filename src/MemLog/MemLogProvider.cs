@@ -8,10 +8,10 @@ namespace MemLog
 {
     public class MemLogProvider : ILoggerProvider
     {
-        private readonly MemLogService _service;
+        private readonly IMemLogService _service;
         private readonly Func<string, LogLevel, bool> _filter;
         private readonly bool _includeScopes;
-        public MemLogProvider(Func<string, LogLevel, bool> filter, bool includeScopes, MemLogService service)
+        public MemLogProvider(Func<string, LogLevel, bool> filter, bool includeScopes, IMemLogService service)
         {
             _service = service;
             _filter = filter;

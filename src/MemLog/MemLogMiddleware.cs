@@ -12,8 +12,8 @@ namespace MemLog
     public class MemLogMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly MemLogService _service;
-        public MemLogMiddleware(RequestDelegate next, MemLogService service)
+        private readonly IMemLogService _service;
+        public MemLogMiddleware(RequestDelegate next, IMemLogService service)
         {
             _next = next;
             _service = service;
