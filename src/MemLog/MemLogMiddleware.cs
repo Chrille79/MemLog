@@ -50,24 +50,31 @@ namespace MemLog
             sb.AppendLine("<style>");
             sb.AppendLine("body{background-color: #1e1e1e; color:#fff;margin-top: 64px;font-family: Consolas, monospace;}");
             sb.AppendLine("header{height: 56px; background: purple; line-height: 56px; font-size: x-large; position: fixed; top: 0; left: 0; width: 100%; padding-left: 16px;}");
-            sb.AppendLine(".crit{background-color: red; color:#fff;}");
-            sb.AppendLine(".fail{background-color: red;}");
-            sb.AppendLine(".warn{color:yellow;}");
-            sb.AppendLine(".info{color:DarkGreen;}");
-            sb.AppendLine(".dbug{color:Gray;}");
-            sb.AppendLine(".trce{color:Gray;}");
-
+            sb.AppendLine(".crit span {background-color: red; color:#fff;}");
+            sb.AppendLine(".crit {border: groove 4px red; padding: 1em 0 1em;}");
+            sb.AppendLine(".fail span {background-color: red;}");
+            sb.AppendLine(".fail {border: dashed 1px red; padding: 1em 0 1em;}");
+            sb.AppendLine(".warn span {color:yellow;}");
+            sb.AppendLine(".info span {color:DarkGreen;}");
+            sb.AppendLine(".dbug span {color:Gray;}");
+            sb.AppendLine(".trce span {color:Gray;}");
+            sb.AppendLine("time {color:Gray;}");
             sb.AppendLine("</style>");
             sb.AppendLine("</head>");
             sb.AppendLine("<body>");
             sb.AppendLine("<header>MemLog</header>");
             foreach (var item in _service)
             {
-                sb.Append("<pre>");
-                if (item.LogLevel.HasValue)
-                {
-                    sb.Append(LogLevelString(item.LogLevel.Value));
-                }
+                sb.Append("<pre class=\"");
+                sb.Append(LogLevelString(item.LogLevel));
+                sb.Append("\">");
+                sb.Append("<span>");
+                sb.Append(LogLevelString(item.LogLevel));
+                sb.Append("</span> ");
+
+                sb.Append("<time>");
+                sb.Append(item.Time.ToString("O"));
+                sb.Append("</time>");
                 sb.Append(item.Message);
                 sb.AppendLine("</pre>");
             }
@@ -79,34 +86,25 @@ namespace MemLog
 
         private string LogLevelString(LogLevel level)
         {
-            string tag = String.Empty;
             switch (level)
             {
                 case LogLevel.Trace:
-                    tag = "<span class=\"trce\">trce</span>";
-                    break;
+                    return "trce";
                 case LogLevel.Debug:
-                    tag = "<span class=\"dbug\">dbug</span>";
-                    break;
+                    return "dbug";
                 case LogLevel.Information:
-                    tag = "<span class=\"info\">info</span>";
-                    break;
+                    return "info";
                 case LogLevel.Warning:
-                    tag = "<span class=\"warn\">warn</span>";
-                    break;
+                    return "warn";
                 case LogLevel.Error:
-                    tag = "<span class=\"fail\">fail</span>";
-                    break;
+                    return "fail";
                 case LogLevel.Critical:
-                    tag = "<span class=\"crit\">crit</span>";
-                    break;
+                    return "crit";
                 case LogLevel.None:
-                    tag = "<span class=\"trce\">trce</span>";
-                    break;
+                    return "trce";
                 default:
                     throw new ArgumentOutOfRangeException(nameof(level));
             }
-            return tag;
         }
     }
 }

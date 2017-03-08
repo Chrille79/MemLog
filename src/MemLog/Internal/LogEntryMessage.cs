@@ -9,7 +9,8 @@ namespace MemLog.Internal
     public struct LogMessageEntry
     {
         public string LevelString;
-        public LogLevel? LogLevel;
+        public LogLevel LogLevel;
         public string Message;
+        public DateTime Time;
     }
 }

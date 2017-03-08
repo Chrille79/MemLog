@@ -14,7 +14,7 @@ namespace MemLog
 
         [ThreadStatic]
         private static StringBuilder _logBuilder;
-        
+
         public MemLog(string name, Func<string, LogLevel, bool> filter, bool includeScopes, MemLogService memLogService)
         {
             if (name == null)
@@ -27,7 +27,7 @@ namespace MemLog
             IncludeScopes = includeScopes;
             _memLogService = memLogService;
         }
-        
+
         public Func<string, LogLevel, bool> Filter
         {
             get { return _filter; }
@@ -66,7 +66,7 @@ namespace MemLog
             }
         }
 
-        public virtual void WriteMessage(LogLevel logLevel, string logName, int eventId, string message, Exception exception)
+        private void WriteMessage(LogLevel logLevel, string logName, int eventId, string message, Exception exception)
         {
             var logBuilder = _logBuilder;
             _logBuilder = null;
@@ -93,7 +93,6 @@ namespace MemLog
                     GetScopeInformation(logBuilder);
                 }
                 // message
-                var len = logBuilder.Length;
                 logBuilder.AppendLine(message);
             }
 
@@ -111,7 +110,8 @@ namespace MemLog
                 _memLogService.EnqueueMessage(new LogMessageEntry()
                 {
                     Message = logBuilder.ToString(),
-                    LogLevel = logLevel
+                    LogLevel = logLevel,
+                    Time = DateTime.Now
                 });
             }
 
@@ -137,7 +137,7 @@ namespace MemLog
 
             return ConsoleLogScope.Push(Name, state);
         }
-        
+
         private void GetScopeInformation(StringBuilder builder)
         {
             var current = ConsoleLogScope.Current;
@@ -146,14 +146,7 @@ namespace MemLog
 
             while (current != null)
             {
-                if (length == builder.Length)
-                {
-                    scopeLog = $"=> {current}";
-                }
-                else
-                {
-                    scopeLog = $"=> {current} ";
-                }
+                scopeLog = $"=> {current} ";
 
                 builder.Insert(length, scopeLog);
                 current = current.Parent;
